@@ -6,7 +6,7 @@ import { UniversidadComponent } from './universidad/universidad.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, UniversidadComponent],
+  imports: [RouterOutlet, UniversidadComponent, UniversidadComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

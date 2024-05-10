@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UniLocation } from '../uni-location';
 
 @Component({
   selector: 'app-uni-location',
@@ -12,5 +14,5 @@ import { Component } from '@angular/core';
   styleUrl: './uni-location.component.css'
 })
 export class UniLocationComponent {
-
+  @Input() uniLocation!: UniLocation;
 }

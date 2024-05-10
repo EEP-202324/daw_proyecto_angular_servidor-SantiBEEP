@@ -25,10 +25,10 @@ import { UniLocation } from '../uni-location';
 export class UniversidadComponent {
   readonly baseUrl = 'https://angular.io/assets/images/tutorials/faa';
 
-  housingLocation: UniLocation = {
+  UniLocation: UniLocation = {
     id: 9999,
-    name: 'Test Home',
-    city: 'Test city',
+    name: 'Universidad1',
+    city: 'Madrid',
     photo: `${this.baseUrl}/example-house.jpg`,
   };
 }

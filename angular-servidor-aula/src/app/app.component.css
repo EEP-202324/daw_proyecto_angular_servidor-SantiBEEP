@@ -1,0 +1,10 @@
+header {
+    align-items: center;
+    margin: auto;
+    display: flex;
+    justify-content: left;
+}
+
+header > h1 {
+    float: right;
+}

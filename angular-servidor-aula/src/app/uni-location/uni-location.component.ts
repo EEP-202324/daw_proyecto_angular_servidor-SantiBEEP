@@ -7,9 +7,11 @@ import { UniLocation } from '../uni-location';
   standalone: true,
   imports: [],
   template: `
-    <p>
-      uni-location works!
-    </p>
+  <section class="listing">
+    <img class="listing-photo" [src]="uniLocation.photo" alt="Exterior photo of {{uniLocation.name}}">
+    <h2 class="listing-heading">{{ uniLocation.name }}</h2>
+    <p class="listing-location">{{ uniLocation.city}}</p>
+  </section>
   `,
   styleUrl: './uni-location.component.css'
 })

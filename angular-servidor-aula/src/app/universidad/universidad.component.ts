@@ -43,7 +43,9 @@ export class UniversidadComponent {
   }
 
 constructor() {
-  this.uniLocationList = this.uniService.getAllUniLocations();
-  this.filteredLocationList = this.uniLocationList;
+  this.uniService.getAllUniLocations().then((uniLocationList: UniLocation[]) => {
+    this.uniLocationList = uniLocationList;
+    this.filteredLocationList = uniLocationList;
+  });
 }
 }

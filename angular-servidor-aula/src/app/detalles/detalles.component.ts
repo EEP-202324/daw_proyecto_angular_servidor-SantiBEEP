@@ -56,8 +56,13 @@ export class DetallesComponent {
   });
 
   constructor() {
-    const housingLocationId = Number(this.route.snapshot.params['id']);
-    this.uniLocation = this.uniService.getUniLocationById(housingLocationId);
+    const uniLocationId = Number(this.route.snapshot.params['id']);
+    this.uniService.getUniLocationById(uniLocationId).
+    then(
+      uniLocation => {
+      this.uniLocation = uniLocation;
+    }
+  );
   }
   submitApplication() {
     this.uniService.submitApplication(

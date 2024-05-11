@@ -1,12 +1,11 @@
-
 <main>
-  <header class="brand-name">
-    <img class="brand-logo" src="favicon.ico" alt="logo" aria-hidden="true">
-    <h1>Universidades</h1>
-  </header>
+  <a [routerLink]="['/']">
+    <header class="brand-name">
+      <img class="brand-logo" src="favicon.ico" alt="logo" aria-hidden="true">
+      <h1>Universidades</h1>
+    </header>
+  </a>
   <section class="content">
-    <app-universidad></app-universidad>
+    <router-outlet></router-outlet>
   </section>
 </main>
-
-<router-outlet />

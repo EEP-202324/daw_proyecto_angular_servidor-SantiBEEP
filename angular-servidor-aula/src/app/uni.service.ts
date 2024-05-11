@@ -17,7 +17,7 @@ export class UniService {
     {
       id: 1,
       name: 'A113 Transitional Housing',
-      city: 'Madrid',
+      city: 'Barcelona',
       photo: `${this.baseUrl}/brandon-griggs-wR11KBaB86U-unsplash.jpg`,
     },
     {
@@ -29,19 +29,19 @@ export class UniService {
     {
       id: 3,
       name: 'Homesteady Housing',
-      city: 'Madrid',
+      city: 'Sevilla',
       photo: `${this.baseUrl}/ian-macdonald-W8z6aiwfi1E-unsplash.jpg`,
     },
     {
       id: 4,
       name: 'Happy Homes Group',
-      city: 'Madrid',
+      city: 'Fuencarral',
       photo: `${this.baseUrl}/krzysztof-hepner-978RAXoXnH4-unsplash.jpg`,
     },
     {
       id: 5,
       name: 'Hopeful Apartment Group',
-      city: 'Madrid',
+      city: 'Vallecas',
       photo: `${this.baseUrl}/r-architecture-JvQ0Q5IkeMM-unsplash.jpg`,
     },
     {
@@ -53,13 +53,13 @@ export class UniService {
     {
       id: 7,
       name: 'Hopeful Housing Solutions',
-      city: 'Madrid',
+      city: 'Lisboa',
       photo: `${this.baseUrl}/r-architecture-GGupkreKwxA-unsplash.jpg`,
     },
     {
       id: 8,
       name: 'Seriously Safe Towns',
-      city: 'Madrid',
+      city: 'Praga',
       photo: `${this.baseUrl}/saru-robert-9rP3mxf8qWI-unsplash.jpg`,
     },
     {
@@ -76,7 +76,7 @@ export class UniService {
   getUniLocationById(id: number): UniLocation | undefined {
     return this.uniLocationList.find(uniLocation => uniLocation.id === id);
   }
-  
+
   submitApplication(firstName: string, lastName: string, email: string) {
     console.log(`Formulario: /n firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
   }

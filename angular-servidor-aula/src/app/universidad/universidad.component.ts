@@ -14,12 +14,13 @@ import { UniService } from '../uni.service';
   template: `
   <section>
     <form>
-      <input type="text" placeholder="Filtrar por Universidades">
-      <button class="primary" type="button">Buscar</button>
+      <input type="text" placeholder="Filtrar por Universidades" #filter>
+      <button class="primary" type="button" 
+      (click)="filterResults(filter.value)">Buscar</button>
     </form>
   </section>
   <section class="results">
-  <app-uni-location *ngFor="let uniLocation of uniLocationList"
+  <app-uni-location *ngFor="let uniLocation of filteredLocationList"
   [uniLocation]="uniLocation"></app-uni-location>
   </section>
 `,
@@ -28,8 +29,21 @@ import { UniService } from '../uni.service';
 export class UniversidadComponent {
   uniLocationList: UniLocation[] = [];
   uniService: UniService = inject(UniService);
+  filteredLocationList: UniLocation[] = [];
+
+  filterResults(text: string) {
+    if (!text) {
+      this.filteredLocationList = this.uniLocationList;
+      return;
+    }
+  
+    this.filteredLocationList = this.uniLocationList.filter(
+      uniLocation => uniLocation?.city.toLowerCase().includes(text.toLowerCase())
+    );
+  }
 
 constructor() {
   this.uniLocationList = this.uniService.getAllUniLocations();
+  this.filteredLocationList = this.uniLocationList;
 }
 }

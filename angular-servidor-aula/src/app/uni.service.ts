@@ -76,4 +76,8 @@ export class UniService {
   getUniLocationById(id: number): UniLocation | undefined {
     return this.uniLocationList.find(uniLocation => uniLocation.id === id);
   }
+  
+  submitApplication(firstName: string, lastName: string, email: string) {
+    console.log(`Formulario: /n firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
+  }
 }

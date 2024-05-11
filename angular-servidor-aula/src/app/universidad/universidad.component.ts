@@ -17,7 +17,7 @@ import { UniLocation } from '../uni-location';
     </form>
   </section>
   <section class="results">
-  <app-uni-location></app-uni-location>
+  <app-uni-location [uniLocation] = "UniLocation"></app-uni-location>
   </section>
 `,
   styleUrl: './universidad.component.css'

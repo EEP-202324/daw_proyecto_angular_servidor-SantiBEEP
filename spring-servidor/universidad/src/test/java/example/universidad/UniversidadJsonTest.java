@@ -8,9 +8,10 @@ import org.springframework.boot.test.json.JacksonTester;
 import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThat;
 
-public class UniversidadJsonTest {
+
+@JsonTest
+class UniversidadJsonTest {
 	
 	@Autowired
     private JacksonTester<Universidad> json;
@@ -22,8 +23,8 @@ public class UniversidadJsonTest {
         assertThat(json.write(uni)).hasJsonPathNumberValue("@.id");
         assertThat(json.write(uni)).extractingJsonPathNumberValue("@.id")
                 .isEqualTo(99);
-        assertThat(json.write(uni)).hasJsonPathNumberValue("@.name");
-        assertThat(json.write(uni)).extractingJsonPathNumberValue("@.name")
+        assertThat(json.write(uni)).hasJsonPathStringValue("@.name");
+        assertThat(json.write(uni)).extractingJsonPathStringValue("@.name")
              .isEqualTo("uni1");
     }
 	
@@ -32,7 +33,7 @@ public class UniversidadJsonTest {
 	   String expected = """
 	           {
 	               "id":99,
-	               "name":'uni1'
+	               "name": "uni1"
 	           }
 	           """;
 	   assertThat(json.parse(expected))

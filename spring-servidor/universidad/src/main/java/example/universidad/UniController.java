@@ -1,9 +1,14 @@
 package example.universidad;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,5 +42,16 @@ class UniController {
 		URI locationOfNewUni = ucb.path("universidad/{id}").buildAndExpand(savedUni.id()).toUri();
 		return ResponseEntity.created(locationOfNewUni).build();
 
+	}
+	
+	@GetMapping
+	private ResponseEntity<List<Universidad>> findAll(Pageable pageable) {
+	    Page<Universidad> page = universidadRepository.findAll(
+	    		PageRequest.of(
+	    			     pageable.getPageNumber(),
+	    			     pageable.getPageSize(),
+	    			     pageable.getSortOr(Sort.by(Sort.Direction.ASC, "name"))
+	    			));
+	    return ResponseEntity.ok(page.getContent());
 	}
 }

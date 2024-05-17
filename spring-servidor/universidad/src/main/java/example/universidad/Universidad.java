@@ -1,5 +1,7 @@
 package example.universidad;
 
-record Universidad(Long id, String name) {
+import org.springframework.data.annotation.Id;
+
+record Universidad(@Id Long id, String name) {
 
 }

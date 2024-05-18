@@ -25,9 +25,9 @@ class UniversidadJsonTest {
 	
 	@BeforeEach
 	void setUp() {
-		universidades = Arrays.array(new Universidad(99L, "uni1", "santi"),
-				new Universidad(100L, "uni2", "santi"),
-				new Universidad(101L, "uni3", "santi"));
+		universidades = Arrays.array(new Universidad(99L, "uni1"),
+				new Universidad(100L, "uni2"),
+				new Universidad(101L, "uni3"));
 	}
 	
 	@Test
@@ -40,18 +40,15 @@ class UniversidadJsonTest {
         assertThat(json.write(uni)).hasJsonPathStringValue("@.name");
         assertThat(json.write(uni)).extractingJsonPathStringValue("@.name")
              .isEqualTo("uni1");
-        assertThat(json.write(uni)).hasJsonPathStringValue("@.owner");
-        assertThat(json.write(uni)).extractingJsonPathStringValue("@.owner")
-             .isEqualTo("santi");
     }
 	
 	@Test
 	void universidadDeserializationTest() throws IOException {
 	   String expected = """
 	           [
-            { "id": 99, "name": "uni1", "owner": "santi" },
-            { "id": 100, "name": "uni2", "owner": "santi" },
-            { "id": 101, "name": "uni3", "owner": "santi" }
+            { "id": 99, "name": "uni1"},
+            { "id": 100, "name": "uni2"},
+            { "id": 101, "name": "uni3"}
          ]
 	           """;
 	   assertThat(jsonList.parse(expected)).isEqualTo(universidades);

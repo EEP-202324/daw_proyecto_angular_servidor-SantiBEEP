@@ -68,7 +68,7 @@ class UniversidadApplicationTests {
     @Test
     @DirtiesContext
     void shouldCreateANewUni() {
-       Universidad newUni = new Universidad(null, "uni2");
+       Universidad newUni = new Universidad(null, "uni2", "santi");
        ResponseEntity<Void> createResponse = restTemplate.postForEntity("/universidad", newUni, Void.class);
        assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
        
@@ -79,9 +79,11 @@ class UniversidadApplicationTests {
        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
        Number id = documentContext.read("$.id");
        String name = documentContext.read("$.name");
+       String owner = documentContext.read("$.owner");
 
        assertThat(id).isNotNull();
        assertThat(name).isEqualTo("uni2");
+       assertThat(owner).isEqualTo("santi");
     }
     
     @Test
@@ -119,4 +121,6 @@ class UniversidadApplicationTests {
         JSONArray names = documentContext.read("$..name");
         assertThat(names).containsExactly("uni1", "uni2", "uni3");
     }
+    
+    
 }

@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
@@ -125,5 +127,51 @@ class UniversidadApplicationTests {
         JSONArray names = documentContext.read("$..name");
         assertThat(names).containsExactly("uni1", "uni2", "uni3");
     }
+    
+    @Test
+    @DirtiesContext
+    void shouldUpdateAnExistingUni() {
+        Universidad uniUpdate = new Universidad(null, "uniA");
+        HttpEntity<Universidad> request = new HttpEntity<>(uniUpdate);
+        ResponseEntity<Void> response = restTemplate
+                .exchange("/universidad/99", HttpMethod.PUT, request, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+        
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/universidad/99", String.class);
+        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+        Number id = documentContext.read("$.id");
+        String name = documentContext.read("$.name");
+        assertThat(id).isEqualTo(99);
+        assertThat(name).isEqualTo("uniA");
+    }
+    
+    @Test
+    void shouldNotUpdateAUniThatDoesNotExist() {
+        Universidad unknownUni = new Universidad(null, "uniA");
+        HttpEntity<Universidad> request = new HttpEntity<>(unknownUni);
+        ResponseEntity<Void> response = restTemplate
+                .exchange("/universidad/99999", HttpMethod.PUT, request, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+    
+    @Test
+    @DirtiesContext
+    void shouldDeleteAnExistingUni() {
+        ResponseEntity<Void> response = restTemplate
+                .exchange("/universidad/99", HttpMethod.DELETE, null, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/universidad/99", String.class);
+        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+    
+    @Test
+    void shouldNotDeleteACashCardThatDoesNotExist() {
+        ResponseEntity<Void> deleteResponse = restTemplate
+                .exchange("/universidad/99999", HttpMethod.DELETE, null, Void.class);
+        assertThat(deleteResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
 }

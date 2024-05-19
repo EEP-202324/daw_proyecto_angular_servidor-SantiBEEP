@@ -36,10 +36,19 @@
 		    <!--<version>3.2.4</version>-->
 		</dependency>
 
-		<!-- com.h2database:h2 -->
+		<!-- MySQL Connector/J -->
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.27</version>
+		</dependency>
+
+		<!--
+		https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+		
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
 	</dependencies>

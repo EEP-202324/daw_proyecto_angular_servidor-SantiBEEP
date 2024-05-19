@@ -41,7 +41,7 @@ class UniController {
 	@PostMapping
 	private ResponseEntity<Void> createUni(@RequestBody Universidad newUniRequest, UriComponentsBuilder ucb) {
 		Universidad savedUni = universidadRepository.save(newUniRequest);
-		URI locationOfNewUni = ucb.path("universidad/{id}").buildAndExpand(savedUni.id()).toUri();
+		URI locationOfNewUni = ucb.path("universidad/{id}").buildAndExpand(savedUni.getId()).toUri();
 		return ResponseEntity.created(locationOfNewUni).build();
 	}
 	
@@ -62,7 +62,7 @@ class UniController {
         if (optional.isPresent()) {
             Universidad universidad = optional.get();
             Universidad updateUniversidad = new Universidad (
-                        universidad.id(), universidadActualizada.name());
+                        universidad.getId(), universidadActualizada.getName());
             universidadRepository.save(updateUniversidad);
             return ResponseEntity.noContent().build();
         } else {

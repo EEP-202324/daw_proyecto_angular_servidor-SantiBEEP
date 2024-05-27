@@ -11,7 +11,7 @@ export class UniversidadesComponent {
     universidades : Universidad[] = [];
     uniSeleccionada?: Universidad;
 
-    getHeroes(): void {
+    getUnis(): void {
       this.universidadService.getUnis().subscribe(
         unisRecibidas => this.universidades = unisRecibidas
       );

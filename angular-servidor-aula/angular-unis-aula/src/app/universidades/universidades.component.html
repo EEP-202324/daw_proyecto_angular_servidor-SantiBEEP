@@ -1,1 +1,6 @@
-<h2>{{universidad}}</h2>
+<h2>{{universidad.name | uppercase}} Detalles:</h2>
+<div><span>id: </span>{{universidad.id}}</div>
+<div>
+    <label for="name">Nombre de la Universidad: </label>
+    <input id="name" [(ngModel)]="universidad.name" placeholder="name">
+  </div>

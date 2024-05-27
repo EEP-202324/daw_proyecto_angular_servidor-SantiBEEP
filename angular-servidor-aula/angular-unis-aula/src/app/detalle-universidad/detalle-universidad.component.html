@@ -1,1 +1,8 @@
-<p>detalle-universidad works!</p>
+<div *ngIf="universidad">
+    <h2>Detalles de {{universidad.name | uppercase}}</h2>
+    <div><span>id: </span> {{universidad.id}}</div>
+    <div>
+      <label for="universidad-name">Nombre de la Universidad: </label>
+      <input id="universidad-name" [(ngModel)]="universidad.name" placeholder="nombre de la universidad">
+    </div>
+  </div>

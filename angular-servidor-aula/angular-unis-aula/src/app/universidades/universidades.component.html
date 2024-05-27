@@ -7,12 +7,4 @@
     </button>
   </li>
 </ul>
-
-<div *ngIf="uniSeleccionada">
-  <h2>Detalles de {{uniSeleccionada.name | uppercase}}</h2>
-  <div>id: {{uniSeleccionada.id}}</div>
-  <div>
-    <label for="universidad-name">Nombre de la Universidad: </label>
-    <input id="universidad-name" [(ngModel)]="uniSeleccionada.name" placeholder="nombre de la universidad">
-  </div>
-</div>
+<app-detalle-universidad [universidad]="uniSeleccionada"></app-detalle-universidad>

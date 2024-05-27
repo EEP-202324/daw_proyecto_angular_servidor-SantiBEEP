@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { UniversidadesComponent } from './universidades/universidades.component';
 import { FormsModule } from '@angular/forms';
 import { DetalleUniversidadComponent } from './detalle-universidad/detalle-universidad.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UniversidadesComponent,
-    DetalleUniversidadComponent
+    DetalleUniversidadComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

@@ -7,13 +7,15 @@ import { UniversidadesComponent } from './universidades/universidades.component'
 import { FormsModule } from '@angular/forms';
 import { DetalleUniversidadComponent } from './detalle-universidad/detalle-universidad.component';
 import { MessagesComponent } from './messages/messages.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UniversidadesComponent,
     DetalleUniversidadComponent,
-    MessagesComponent
+    MessagesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

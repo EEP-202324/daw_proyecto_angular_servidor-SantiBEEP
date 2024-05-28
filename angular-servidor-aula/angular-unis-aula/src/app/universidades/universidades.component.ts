@@ -27,7 +27,7 @@ export class UniversidadesComponent implements OnInit {
 
     onSelect(universidad: Universidad): void {
      this.uniSeleccionada = universidad;
-     this.messageService.add('UniversidadesComponent: Uni seleccionada id=${universidad.id}');
+     this.messageService.add(`UniversidadesComponent: Universidad seleccionada id=${universidad.id}`);
   }
   
 }

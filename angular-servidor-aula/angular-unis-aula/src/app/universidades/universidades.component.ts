@@ -9,9 +9,7 @@ import { MessageService } from '../message.service';
   styleUrl: './universidades.component.css'
 })
 export class UniversidadesComponent implements OnInit {
-
-    uniSeleccionada?: Universidad;
-
+  
     universidades : Universidad[] = [];
 
     constructor(private universidadService: UniversidadService, private messageService: MessageService) {}
@@ -24,10 +22,4 @@ export class UniversidadesComponent implements OnInit {
       this.universidadService.getUnis().subscribe(
         unis => this.universidades = unis);
     }
-
-    onSelect(universidad: Universidad): void {
-     this.uniSeleccionada = universidad;
-     this.messageService.add(`UniversidadesComponent: Universidad seleccionada id=${universidad.id}`);
-  }
-  
 }

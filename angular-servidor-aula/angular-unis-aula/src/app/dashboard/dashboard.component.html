@@ -1,6 +1,7 @@
-<h2>Unis</h2>
+<h2>Universidades Top</h2>
 <div class="unis-menu">
-  <a *ngFor="let universidad of universidades">
+  <a *ngFor="let universidad of universidades"
+  routerLink="/detalles/{{universidad.id}}">
     {{universidad.name}}
   </a>
 </div>

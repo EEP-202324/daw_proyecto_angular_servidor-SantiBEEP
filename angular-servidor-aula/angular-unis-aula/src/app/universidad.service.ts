@@ -77,4 +77,16 @@ export class UniversidadService {
       catchError(this.handleError<Universidad>('deleteUni'))
     );
   }
+
+  searchUnis(term: string): Observable<Universidad[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    return this.http.get<Universidad[]>(`${this.urlUnis}/?name=${term}`).pipe(
+      tap(x => x.length ?
+         this.log(`unis que cumplen "${term}"`) :
+         this.log(`no se encontraron unis que cumplan "${term}"`)),
+      catchError(this.handleError<Universidad[]>('searchUnis', []))
+    );
+  }
 }

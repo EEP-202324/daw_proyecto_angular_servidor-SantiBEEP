@@ -1,4 +1,6 @@
 {
   "id": 99,
-  "name": "Universidad Primera"
+  "name": 'Universidad Primera',
+  "ciudad": 'Madrid',
+  "image": 'url'
 }

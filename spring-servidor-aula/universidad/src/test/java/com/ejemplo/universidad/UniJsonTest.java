@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 	    @Test
 	    void uniSerializationTest() throws IOException {
-	        Universidad cashCard = new Universidad(99L, "Universidad Primera");
+	        Universidad cashCard = new Universidad(99L, "Universidad Primera", "Madrid", "url");
 	        assertThat(json.write(cashCard)).isStrictlyEqualToJson("expected.json");
 	        assertThat(json.write(cashCard)).hasJsonPathNumberValue("@.id");
 	        assertThat(json.write(cashCard)).extractingJsonPathNumberValue("@.id")
@@ -24,6 +24,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 	        assertThat(json.write(cashCard)).hasJsonPathStringValue("@.name");
 	        assertThat(json.write(cashCard)).extractingJsonPathStringValue("@.name")
 	             .isEqualTo("Universidad Primera");
+	        assertThat(json.write(cashCard)).hasJsonPathStringValue("@.ciudad");
+	        assertThat(json.write(cashCard)).extractingJsonPathStringValue("@.ciudad")
+	             .isEqualTo("Madrid");
+	        assertThat(json.write(cashCard)).hasJsonPathStringValue("@.image");
+	        assertThat(json.write(cashCard)).extractingJsonPathStringValue("@.image")
+	             .isEqualTo("url");
 	    }
 	    
 	    @Test
@@ -31,13 +37,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 	       String expected = """
 	               {
 	                   "id":99,
-	                   "name":"Universidad Primera"
+	                   "name":"Universidad Primera",
+	                   "ciudad":"Madrid",
+	                   "image":"url"
 	               }
 	               """;
 	       assertThat(json.parse(expected))
-	               .isEqualTo(new Universidad(99L, "Universidad Primera"));
-	       assertThat(json.parseObject(expected).id()).isEqualTo(99);
-	       assertThat(json.parseObject(expected).name()).isEqualTo("Universidad Primera");
+	               .isEqualTo(new Universidad(99L, "Universidad Primera", "Madrid", "url"));
+	       assertThat(json.parseObject(expected).getId()).isEqualTo(99);
+	       assertThat(json.parseObject(expected).getName()).isEqualTo("Universidad Primera");
+	       assertThat(json.parseObject(expected).getCiudad()).isEqualTo("Madrid");
+	       assertThat(json.parseObject(expected).getImage()).isEqualTo("url");
 	    }
 	}
 

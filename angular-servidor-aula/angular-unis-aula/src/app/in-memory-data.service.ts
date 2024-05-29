@@ -14,7 +14,7 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 15, name: 'UniD' },
       { id: 16, name: 'UniE' },
       { id: 17, name: 'UniF' }
-    ]
+    ];
     return {universidades};
   }
 

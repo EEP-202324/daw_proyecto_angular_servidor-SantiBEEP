@@ -25,16 +25,15 @@ export class UniversidadService {
   getUnis(): Observable<Universidad[]> {
     return this.http.get<Universidad[]>(this.urlUnis).
     pipe(
-      tap(_ => this.log('universidades recuperadas')),
+      tap(_ => this.log('Universidades recuperadas')),
       catchError(this.handleError<Universidad[]>('getUnis', []))
   );
   }
 
   getUni(id: number): Observable<Universidad> {
     const url = `${this.urlUnis}/${id}`;
-    this.messageService.add(`UniversidadService: Uni recuperada id=${id}`);
     return this.http.get<Universidad>(url).pipe(
-      tap(_ => this.log(`uni recuperada id=${id}`)),
+      tap(_ => this.log(`Univerisdad recuperada id=${id}`)),
       catchError(this.handleError<Universidad>(`getUni id=${id}`))
     );
   }
@@ -71,4 +70,11 @@ export class UniversidadService {
     );
   }
   
+  deleteUni(id: number): Observable<Universidad> {
+    const url = `${this.urlUnis}/${id}`;
+    return this.http.delete<Universidad>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`Universidad Eliminada id=${id}`)),
+      catchError(this.handleError<Universidad>('deleteUni'))
+    );
+  }
 }

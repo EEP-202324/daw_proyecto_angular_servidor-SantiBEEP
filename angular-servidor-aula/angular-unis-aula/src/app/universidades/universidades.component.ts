@@ -31,4 +31,9 @@ export class UniversidadesComponent implements OnInit {
           this.universidades.push(uni);
         });
     }
+
+    delete(uni: Universidad): void {
+      this.universidades = this.universidades.filter(h => h !== uni);
+      this.universidadService.deleteUni(uni.id).subscribe();
+    }
 }

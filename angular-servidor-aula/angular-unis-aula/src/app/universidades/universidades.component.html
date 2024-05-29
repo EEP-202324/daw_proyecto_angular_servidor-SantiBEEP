@@ -11,5 +11,7 @@
     <a routerLink="/detalles/{{universidad.id}}">
       <span class="badge">{{universidad.id}}</span> {{universidad.name}}
     </a>
+    <button type="button" class="delete" title="delete universidad"
+  (click)="delete(universidad)">Eliminar</button>
   </li>
 </ul>

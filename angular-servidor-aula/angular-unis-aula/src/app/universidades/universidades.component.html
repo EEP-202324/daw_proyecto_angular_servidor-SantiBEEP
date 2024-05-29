@@ -1,4 +1,11 @@
 <h2>Universidades</h2>
+<div>
+  <label for="new-uni">Nombre de la Universidad: </label>
+  <input id="new-uni" #uniName />
+  <button type="button" class="add-button" (click)="add(uniName.value); uniName.value=''">
+    Añadir Universidad
+  </button>
+</div>
 <ul class="unis">
   <li *ngFor = "let universidad of universidades">
     <a routerLink="/detalles/{{universidad.id}}">

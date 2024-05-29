@@ -14,6 +14,10 @@ export class UniversidadService {
 
   private urlUnis = 'api/universidades';
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
@@ -51,6 +55,20 @@ export class UniversidadService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  updateUni(universidad: Universidad): Observable<any> {
+    return this.http.put(this.urlUnis, universidad, this.httpOptions).pipe(
+      tap(_ => this.log(`Uni actualizada id=${universidad.id}`)),
+      catchError(this.handleError<any>('updateUni'))
+    );
+  }
+
+  addUni(uni: Universidad): Observable<Universidad> {
+    return this.http.post<Universidad>(this.urlUnis, uni, this.httpOptions).pipe(
+      tap((newUni: Universidad) => this.log(`Universidad Añadida w/ id=${newUni.id}`)),
+      catchError(this.handleError<Universidad>('addUni'))
+    );
   }
   
 }

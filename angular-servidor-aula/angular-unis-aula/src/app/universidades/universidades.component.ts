@@ -22,4 +22,13 @@ export class UniversidadesComponent implements OnInit {
       this.universidadService.getUnis().subscribe(
         unis => this.universidades = unis);
     }
+
+    add(name: string): void {
+      name = name.trim();
+      if (!name) { return; }
+      this.universidadService.addUni({ name } as Universidad)
+        .subscribe(uni => {
+          this.universidades.push(uni);
+        });
+    }
 }

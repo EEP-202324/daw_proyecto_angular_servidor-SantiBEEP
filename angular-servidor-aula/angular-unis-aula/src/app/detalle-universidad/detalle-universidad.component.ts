@@ -31,4 +31,11 @@ export class DetalleUniversidadComponent {
   goBack(): void {
     this.location.back();
   }
+
+  save(): void {
+    if (this.universidad) {
+      this.universidadService.updateUni(this.universidad)
+        .subscribe(() => this.goBack());
+    }
+  }
 }

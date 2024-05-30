@@ -162,4 +162,23 @@ class UniversidadApplicationTests {
                 .exchange("/universidades/99999", HttpMethod.PUT, request, Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
     }
+    
+    @Test
+    @DirtiesContext
+    void shouldDeleteAnExistingUni() {
+        ResponseEntity<Void> response = restTemplate
+                .exchange("/universidades/99", HttpMethod.DELETE, null, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+        
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/universidades/99", String.class);
+        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
+    
+    @Test
+    void shouldNotDeleteAUniThatDoesNotExist() {
+        ResponseEntity<Void> deleteResponse = restTemplate
+                .exchange("/universidades/99999", HttpMethod.DELETE, null, Void.class);
+        assertThat(deleteResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
 }

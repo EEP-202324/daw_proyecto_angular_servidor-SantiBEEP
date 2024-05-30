@@ -1,6 +1,20 @@
-{
-  "id": 99,
-  "name": 'Universidad Primera',
-  "ciudad": 'Madrid',
-  "image": 'url'
-}
+[
+   {
+      "id":99,
+      "name": 'Universidad Primera',
+      "ciudad":'Madrid',
+      "image":'url'
+   },
+   {
+      "id":100,
+      "name": 'Universidad Segunda',
+      "ciudad":'Madrid',
+      "image":'url'
+   },
+   {
+      "id":101,
+      "name": 'Universidad Tercera',
+      "ciudad":'Madrid',
+      "image":'url'
+   }
+]

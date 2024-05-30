@@ -41,4 +41,9 @@ class UniversidadController {
 	            .toUri();
 	   return ResponseEntity.created(locationOfNewUni).build();
 	}
+	
+	@GetMapping()
+	private ResponseEntity<Iterable<Universidad>> findAll() {
+	   return ResponseEntity.ok(universidadRepository.findAll());
+	}
 }

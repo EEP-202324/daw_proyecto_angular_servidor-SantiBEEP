@@ -8,7 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.DirtiesContext;
+
 import java.net.URI;
+import net.minidev.json.JSONArray;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,6 +49,7 @@ class UniversidadApplicationTests {
     }
     
     @Test
+    @DirtiesContext
     void shouldCreateANewUni() {
        Universidad newUni = new Universidad(null, "Universidad Segunda", "Madrid", "url");
        ResponseEntity<Void> createResponse = restTemplate.postForEntity("/universidades", newUni, Void.class);
@@ -65,5 +69,27 @@ class UniversidadApplicationTests {
        assertThat(name).isEqualTo("Universidad Segunda");
        assertThat(ciudad).isEqualTo("Madrid");
        assertThat(image).isEqualTo("url");
+    }
+    
+    @Test
+    void shouldReturnAllUnisWhenListIsRequested() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/universidades", String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
+        int cashCardCount = documentContext.read("$.length()");
+        assertThat(cashCardCount).isEqualTo(3);
+
+        JSONArray ids = documentContext.read("$..id");
+        assertThat(ids).containsExactlyInAnyOrder(99, 100, 101);
+
+        JSONArray names = documentContext.read("$..name");
+        assertThat(names).containsExactlyInAnyOrder("Universidad Primera", "Universidad Segunda", "Universidad Tercera");
+        
+        JSONArray images = documentContext.read("$..image");
+        assertThat(images).containsExactlyInAnyOrder("url", "url", "url");
+        
+        JSONArray ciudades = documentContext.read("$..ciudad");
+        assertThat(ciudades).containsExactlyInAnyOrder("Madrid", "Madrid", "Madrid");
     }
 }

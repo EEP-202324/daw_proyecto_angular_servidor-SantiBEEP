@@ -153,4 +153,13 @@ class UniversidadApplicationTests {
         assertThat(ciudad).isEqualTo("Madrid");
         assertThat(image).isEqualTo("url");
     }
+    
+    @Test
+    void shouldNotUpdateAUniThatDoesNotExist() {
+        Universidad unknownUni = new Universidad(null, "Nombre Cambiado", null, null);
+        HttpEntity<Universidad> request = new HttpEntity<>(unknownUni);
+        ResponseEntity<Void> response = restTemplate
+                .exchange("/universidades/99999", HttpMethod.PUT, request, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    }
 }

@@ -9,6 +9,8 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 
 import java.net.URI;
 import net.minidev.json.JSONArray;
@@ -128,5 +130,27 @@ class UniversidadApplicationTests {
         JSONArray names = documentContext.read("$..name");
         assertThat(names).containsExactly("Universidad Primera", "Universidad Segunda", "Universidad Tercera");
     }
-
+    
+    @Test
+    @DirtiesContext
+    void shouldUpdateAnExistingUni() {
+        Universidad uniUpdate = new Universidad(null, "Nombre Cambiado", null, null);
+        HttpEntity<Universidad> request = new HttpEntity<>(uniUpdate);
+        ResponseEntity<Void> response = restTemplate
+                .exchange("/universidades/99", HttpMethod.PUT, request, Void.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+        
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/universidades/99", String.class);
+        assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+        Number id = documentContext.read("$.id");
+        String name = documentContext.read("$.name");
+        String ciudad = documentContext.read("$.ciudad");
+        String image = documentContext.read("$.image");
+        assertThat(id).isEqualTo(99);
+        assertThat(name).isEqualTo("Nombre Cambiado");
+        assertThat(ciudad).isEqualTo("Madrid");
+        assertThat(image).isEqualTo("url");
+    }
 }

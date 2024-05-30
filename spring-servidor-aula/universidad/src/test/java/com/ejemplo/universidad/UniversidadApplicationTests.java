@@ -92,4 +92,41 @@ class UniversidadApplicationTests {
         JSONArray ciudades = documentContext.read("$..ciudad");
         assertThat(ciudades).containsExactlyInAnyOrder("Madrid", "Madrid", "Madrid");
     }
+    
+    @Test
+    void shouldReturnAPageOfUnis() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/universidades?page=0&size=1", String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
+        JSONArray page = documentContext.read("$[*]");
+        assertThat(page.size()).isEqualTo(1);
+    }
+    
+    @Test
+    void shouldReturnASortedPageOfUnis() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/universidades?page=0&size=1&sort=id,desc", String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
+        JSONArray read = documentContext.read("$[*]");
+        assertThat(read.size()).isEqualTo(1);
+
+        Number id = documentContext.read("$[0].id");
+        assertThat(id).isEqualTo(101);
+    }
+    
+    @Test
+    void shouldReturnASortedPageOfUnisWithNoParametersAndUseDefaultValues() {
+        ResponseEntity<String> response = restTemplate.getForEntity("/universidades", String.class);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
+        JSONArray page = documentContext.read("$[*]");
+        assertThat(page.size()).isEqualTo(3);
+
+        JSONArray names = documentContext.read("$..name");
+        assertThat(names).containsExactly("Universidad Primera", "Universidad Segunda", "Universidad Tercera");
+    }
+
 }

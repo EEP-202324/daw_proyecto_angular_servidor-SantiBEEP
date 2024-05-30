@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import java.net.URI;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,5 +43,27 @@ class UniversidadApplicationTests {
 
       assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
       assertThat(response.getBody()).isBlank();
+    }
+    
+    @Test
+    void shouldCreateANewUni() {
+       Universidad newUni = new Universidad(null, "Universidad Segunda", "Madrid", "url");
+       ResponseEntity<Void> createResponse = restTemplate.postForEntity("/universidades", newUni, Void.class);
+       assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+       
+       URI locationOfNewUni = createResponse.getHeaders().getLocation();
+       ResponseEntity<String> getResponse = restTemplate.getForEntity(locationOfNewUni, String.class);
+       assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+       
+       DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+       Number id = documentContext.read("$.id");
+       String name = documentContext.read("$.name");
+       String ciudad = documentContext.read("$.ciudad");
+       String image = documentContext.read("$.image");
+
+       assertThat(id).isNotNull();
+       assertThat(name).isEqualTo("Universidad Segunda");
+       assertThat(ciudad).isEqualTo("Madrid");
+       assertThat(image).isEqualTo("url");
     }
 }

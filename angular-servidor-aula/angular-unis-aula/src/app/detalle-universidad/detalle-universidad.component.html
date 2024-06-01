@@ -5,6 +5,13 @@
       <label for="universidad-name">Nombre de la Universidad: </label>
       <input id="universidad-name" [(ngModel)]="universidad.name" placeholder="nombre de la universidad">
     </div>
+    <div>
+      <label for="universidad-name">Ubicación: </label>
+      <input id="universidad-ciudad" [(ngModel)]="universidad.ciudad" placeholder="nombre de la universidad">
+    </div>
+    <div>
+      <img id="universidad-image" (src)="universidad.image">
+    </div>
     <button type="button" (click)="goBack()">Volver</button>
     <button type="button" (click)="save()">Guardar</button>
   </div>

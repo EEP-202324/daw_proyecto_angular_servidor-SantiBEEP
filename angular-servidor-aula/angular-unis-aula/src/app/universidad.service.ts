@@ -12,8 +12,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 export class UniversidadService {
 
-  private urlUnis = 'api/universidades';
-
+  private urlUnis = 'http://localhost:8080/universidades';
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -63,7 +63,7 @@ export class UniversidadService {
     );
   }
 
-  addUni(uni: Universidad): Observable<Universidad> {
+  addUni(uni: Universidad): Observable<Universidad> {//TODO
     return this.http.post<Universidad>(this.urlUnis, uni, this.httpOptions).pipe(
       tap((newUni: Universidad) => this.log(`Universidad Añadida w/ id=${newUni.id}`)),
       catchError(this.handleError<Universidad>('addUni'))
@@ -78,7 +78,7 @@ export class UniversidadService {
     );
   }
 
-  searchUnis(term: string): Observable<Universidad[]> {
+  searchUnis(term: string): Observable<Universidad[]> { //TODO
     if (!term.trim()) {
       return of([]);
     }

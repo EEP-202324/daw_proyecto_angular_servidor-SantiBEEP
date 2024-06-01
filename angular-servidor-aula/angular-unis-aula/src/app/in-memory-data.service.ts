@@ -8,12 +8,24 @@ import { Universidad } from './universidad';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const universidades = [
-      { id: 12, name: 'UniA' },
-      { id: 13, name: 'UniB' },
-      { id: 14, name: 'UniC' },
-      { id: 15, name: 'UniD' },
-      { id: 16, name: 'UniE' },
-      { id: 17, name: 'UniF' }
+      {
+        "id": 99,
+        "name": "Universidad Primera",
+        "ciudad": "Madrid",
+        "image": "url"
+      },
+      {
+        "id": 100,
+        "name": "Universidad Segunda",
+        "ciudad": "Madrid",
+        "image": "url"
+      },
+      {
+        "id": 101,
+        "name": "Universidad Tercera",
+        "ciudad": "Madrid",
+        "image": "url"
+      } 
     ];
     return {universidades};
   }

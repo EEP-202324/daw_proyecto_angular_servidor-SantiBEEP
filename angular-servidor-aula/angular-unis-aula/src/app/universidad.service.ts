@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Universidad } from './universidad';
-import { UNIVERSIDADES } from './mock-universidades';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -52,7 +51,7 @@ export class UniversidadService {
 
   updateUni(universidad: Universidad): Observable<any> {
     return this.http.put(this.urlUnis, universidad, this.httpOptions).pipe(
-      tap(_ => this.log(`Uni actualizada id=${universidad.id}`)),
+      tap(_ => this.log(`Uni actualizada: id=${universidad.id}`)),
       catchError(this.handleError<any>('updateUni'))
     );
   }

@@ -31,6 +31,6 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   genId(universidades: Universidad[]): number {
-    return universidades.length > 0 ? Math.max(...universidades.map(uni => uni.id)) + 1 : 11;
+    return universidades.length > 0 ? Math.max(...universidades.map(uni => uni.id)) + 1 : 1;
   }
 }

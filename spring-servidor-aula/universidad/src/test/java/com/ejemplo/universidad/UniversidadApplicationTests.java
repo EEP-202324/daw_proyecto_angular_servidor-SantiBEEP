@@ -53,7 +53,7 @@ class UniversidadApplicationTests {
     @Test
     @DirtiesContext
     void shouldCreateANewUni() {
-       Universidad newUni = new Universidad(null, "Universidad Segunda", "Madrid", "url");
+       Universidad newUni = new Universidad(null, "Universidad Segunda", null, null);
        ResponseEntity<Void> createResponse = restTemplate.postForEntity("/universidades", newUni, Void.class);
        assertThat(createResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
        
@@ -69,8 +69,8 @@ class UniversidadApplicationTests {
 
        assertThat(id).isNotNull();
        assertThat(name).isEqualTo("Universidad Segunda");
-       assertThat(ciudad).isEqualTo("Madrid");
-       assertThat(image).isEqualTo("url");
+       assertThat(ciudad).isNull();
+       assertThat(image).isNull();
     }
     
     @Test

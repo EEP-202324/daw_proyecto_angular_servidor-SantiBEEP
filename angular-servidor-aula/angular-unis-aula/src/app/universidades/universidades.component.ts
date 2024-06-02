@@ -20,7 +20,7 @@ export class UniversidadesComponent implements OnInit {
 
     getUnis(): void {
       this.universidadService.getUnis().subscribe(
-        unis => this.universidades = unis);
+        universidades => this.universidades = universidades);
     }
 
     add(name: string): void {

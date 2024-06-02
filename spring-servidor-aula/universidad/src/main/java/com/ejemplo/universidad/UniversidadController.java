@@ -42,11 +42,11 @@ class UniversidadController {
 	}
 	
 	@PostMapping
-	private ResponseEntity<Void> createCashCard(@RequestBody Universidad newUniRequest, UriComponentsBuilder ucb) {
-	   Universidad savedCashCard = universidadRepository.save(newUniRequest);
+	private ResponseEntity<Void> createUni(@RequestBody Universidad newUniRequest, UriComponentsBuilder ucb) {
+	   Universidad savedUni= universidadRepository.save(newUniRequest);
 	   URI locationOfNewUni = ucb
 	            .path("universidades/{id}")
-	            .buildAndExpand(savedCashCard.getId())
+	            .buildAndExpand(savedUni.getId())
 	            .toUri();
 	   return ResponseEntity.created(locationOfNewUni).build();
 	}
